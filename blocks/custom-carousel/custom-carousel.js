@@ -27,7 +27,13 @@ export default function decorate(block) {
 
     if (content) {
       [...content.childNodes].forEach((node) => {
-        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'IMG') return;
+        if (
+          node.nodeType === Node.ELEMENT_NODE
+          && node.tagName === 'IMG'
+        ) {
+          return;
+        }
+
         body.append(node.cloneNode(true));
       });
     }
@@ -58,15 +64,7 @@ export default function decorate(block) {
   next.setAttribute('aria-label', 'Next slide');
 
   let active = 0;
-  const dots = slides.map((slide, index) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'carousel-dot';
-    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-    dot.addEventListener('click', () => showSlide(index));
-    indicators.append(dot);
-    return dot;
-  });
+  const dots = [];
 
   function showSlide(index) {
     active = (index + slides.length) % slides.length;
@@ -77,9 +75,24 @@ export default function decorate(block) {
 
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === active);
-      dot.setAttribute('aria-current', i === active ? 'true' : 'false');
+      dot.setAttribute(
+        'aria-current',
+        i === active ? 'true' : 'false',
+      );
     });
   }
+
+  slides.forEach((slide, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+
+    dot.addEventListener('click', () => showSlide(index));
+
+    indicators.append(dot);
+    dots.push(dot);
+  });
 
   previous.addEventListener('click', () => showSlide(active - 1));
   next.addEventListener('click', () => showSlide(active + 1));

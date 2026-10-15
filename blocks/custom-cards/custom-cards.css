@@ -68,7 +68,7 @@
   text-decoration: underline;
 }
 
-@media (max-width: 600px) {
+@media (width >= 600px) {
   .feature-cards-grid {
     grid-template-columns: 1fr;
     gap: 18px;

@@ -105,7 +105,7 @@
   background: #246bfe;
 }
 
-@media (max-width: 650px) {
+@media (width >= 650px) {
   .feature-slide {
     grid-template-columns: 1fr;
   }

@@ -70,17 +70,17 @@
   transition: transform 180ms ease, background 180ms ease;
 }
 
-.hero-actions a:hover {
-  transform: translateY(-2px);
-  background: #e4f2ff;
-}
-
 .hero-actions a + a {
   color: #fff;
   background: transparent;
 }
 
-@media (max-width: 600px) {
+.hero-actions a:hover {
+  transform: translateY(-2px);
+  background: #e4f2ff;
+}
+
+@media (width >= 600px) {
   .hero-banner-inner {
     min-height: 420px;
     padding: 30px 22px;
