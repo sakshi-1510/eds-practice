@@ -66,6 +66,7 @@ export default function decorate(block) {
   let active = 0;
   const dots = [];
 
+  // Declare showSlide before registering any event handlers.
   function showSlide(index) {
     active = (index + slides.length) % slides.length;
 
@@ -88,14 +89,21 @@ export default function decorate(block) {
     dot.className = 'carousel-dot';
     dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
 
-    dot.addEventListener('click', () => showSlide(index));
-
     indicators.append(dot);
     dots.push(dot);
+
+    dot.addEventListener('click', () => {
+      showSlide(index);
+    });
   });
 
-  previous.addEventListener('click', () => showSlide(active - 1));
-  next.addEventListener('click', () => showSlide(active + 1));
+  previous.addEventListener('click', () => {
+    showSlide(active - 1);
+  });
+
+  next.addEventListener('click', () => {
+    showSlide(active + 1);
+  });
 
   controls.append(previous, indicators, next);
   block.replaceChildren(carousel, controls);
