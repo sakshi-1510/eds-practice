@@ -66,7 +66,6 @@ export default function decorate(block) {
   let active = 0;
   const dots = [];
 
-  // Declare showSlide before registering any event handlers.
   function showSlide(index) {
     active = (index + slides.length) % slides.length;
 
